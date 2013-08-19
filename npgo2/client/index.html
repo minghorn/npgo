@@ -1,0 +1,241 @@
+<head>
+<title> Accounts </title>
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+	
+	{{>bodyTemplate}}
+
+</body>
+
+<template name="landing">
+	<center>
+		<div class="landing">
+				{{>user_info}}
+		</div>
+	</center>
+</template>
+
+<template name="header">
+	<center>
+		<div class="header">
+				{{>user_info}}
+		</div>
+	</center>
+</template>
+
+<template name="user_info">
+	<ul class="header">
+		<div id="username">
+			{{#if currentUser}}
+				<div="login">{{>user_loggedin}}</div>
+		</div><!--username-->
+			{{else}}
+				<div="logout">{{>user_loggedout}}</div>
+			{{/if}}
+	</ul>
+</template>
+
+<template name="user_loggedin">
+	{{#if loggingIn}}
+		<li><a>Logging in...</a></li>
+	{{else}}
+		<div class="welcomebuttons">
+				{{>TopButtons}}
+		</div>
+	{{/if}}
+</template>
+
+<template name="user_loggedout">
+	<div id="login">
+		<div id="hola">WELCOME TO NPGo!</div>
+		<a class="login">Login with Twitter</a>
+	</div>
+</template>
+
+<template name="bodyTemplate">
+	{{#if islanding}}
+		{{>landing}}
+	{{/if}}
+	{{#if isheader}}
+		{{>header}}
+		
+	{{/if}}
+	{{#if isSignUp}}
+		{{TopButtons}}
+		{{>SignUp}}
+		
+	{{/if}}
+	{{#if isNPlist}}
+		{{TopButtons}}
+		{{>user_loggedin}}
+		{{>NPlist}}
+		
+		
+	{{/if}}
+	{{#if isVolunteer}}
+		{{TopButtons}}
+		{{>user_loggedin}}
+		{{>Volunteer}}
+		
+		
+	{{/if}}
+	{{#if isEducation}}
+		{{TopButtons}}
+		{{>user_loggedin}}
+		{{>NPlist}}
+		
+	{{/if}}
+	{{#if isEnvironment}}
+		{{TopButtons}}
+		{{>user_loggedin}}
+		{{>NPlist}}
+		
+		
+	{{/if}}
+	{{#if isAnimals}}
+		{{TopButtons}}
+		{{>user_loggedin}}
+		{{>NPlist}}
+		
+		
+	{{/if}}
+	{{#if isJustice}}
+		{{TopButtons}}
+		{{>user_loggedin}}
+		{{>NPlist}}
+		
+	{{/if}}
+	{{#if isOther}}
+		{{TopButtons}}
+		{{>user_loggedin}}
+		{{>NPlist}}
+		
+		
+	{{/if}}
+	
+	{{#if isProfile}}
+		{{>backButton}}
+		<div id="profile">
+			{{>Profile}}
+		</div>
+	{{/if}}
+
+</template>
+
+<template name="NPlist">
+	<div class="NPlist">
+		{{#each Non_Profits getPage}}
+  			{{>Non_Profit}}
+		{{/each}}
+	</div>
+</template>
+
+<template name="Non_Profit">
+<center>
+	<div class="form">
+		<p class="crop"><span class="picture"><img src= {{picture}} style="height: 80px; width: 80px; position: absolute; left: 15px; padding-top:30px; "</span></p>
+		<div class="nonprofit_profile">
+			<p><span class="nonprofit">{{nonprofit}}</span></p>
+			<p><span class="location">{{location}}</span></p>
+			<p><span class="name">{{name}}</span></p>
+			<p><span class="contact">{{contact}}</span></p>
+			<p><span class="number">{{number}}</span></p>
+			<p><span class="description">{{description}}</span></p>
+		</div>
+	</div>
+</center>
+</template>
+
+<template name="SignUp">
+		<div class ="SignUp">
+		
+			<div id="header">
+				<h1><span id="back_button"><input type="button" class="back" value="<" style="font-size:30px; width: 25px; height: 30px; background-color: transparent;"/></span><span id="nonprofit">NEW NONPROFIT ENTRY</span></h1>
+			</div>
+			<center>
+			<p><input type="text" id="np" placeholder="Nonprofit Name" size="70px"/></p>
+			<p><input type="text" id="city" placeholder="Address" size="70px"/></p>
+        	<p><input type="text" id="name" placeholder="Coordinator's Name" size="70px"/></p>
+			 <p><input type="text" id="email" placeholder="Email" size="70px"/></p>
+			 <p><input type="text" id="about" placeholder="Description (45 character max)" size="70px"/></p>
+			 <p><input type="text" id="pic" placeholder="Picture URL (1:1 ratio)" size="70px"/></p>
+			 <p><input type ="text" id="number" placeholder="Phone Number" size="70px"/></p>
+			 <p><select id="categories" placeholder = "Choose Option">
+			 	<option value = "Education" selected="selected">Education</option>
+			 	<option value = "Animals">Animals</option>
+			 	<option value = "Environment">Environment</option>
+			 	<option value = "Social Justice">Social Justice</option>
+			 	<option value = "Other">Other</option>
+			 </select></p>
+			
+        	<p><input type="button" class="add" value="Add to Database" />
+        </center>
+		</div>
+</template>
+
+<template name="Volunteer">
+	<div class="Volunteer">
+	<ul>
+		<li><span><input type="button" class="Education" value="Education" style="width:400px; height: 60px; background-color:#bdc3c7;"/></span></li>
+		<li><span><input type="button" class="Environment" value="Environment" style="width:400px; height: 60px; background-color:#95a5a6;"/></span></li>
+		<li><span><input type="button" class="Animals" value="Animals" style="width:400px; height: 60px; background-color:#7f8c8d;"/></span></li>
+		<li><span><input type="button" class="Justice" value="Social Justice" style="width:400px; height: 60px; background-color:#34495e;"/></span></li>
+		<li><span><input type="button" class="Other" value="Other" style="width:400px; height: 60px; background-color:#2c3e50;"/></span></li>
+		<li><span><input type="button" class="Register" value="Register Non-Profit" style="width:400px; background-color:#e74c3c; height: 60px;"/></span></li>
+	</ul>
+	<div id="credits">Created by: Ming Horn, Lindsay Chan, and Lila Jansen @GirlsWhoCode<div>
+	</div>
+</template>
+
+<template name="TopButtons">
+	<div class="TopButtons">
+		<input type="button" class="VButton" value="Volunteer" style="height: 60px; width: 198px;"/>
+		<input type="button" class="PButton" value="{{currentUser.profile.name}}" style="height: 60px; width: 198px"/>	
+	</div>
+</template>
+
+<template name="Profile">
+<center>
+	<div id="profile_image"><img class="img-rounded" style=" height: 60px; margin-top: 4px;" src="{{currentUser.services.twitter.profile_image_url}}"/></div>
+	<div id="profile_name">{{currentUser.profile.name}}</div>
+	<div>
+	<div class="bounding_box">
+		<div class= "hours_worked">
+			<span id="worked"><p>{{currentUser.profile.hours}}</p></span>
+			<p>Hours Worked</p>
+		</div>
+	</div>
+    <select id="select1" placeholder= "Hours Worked">
+        <option value="1" selected="selected">1</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        
+    </select>
+    <br/>
+    	<button class="hours">Verify Hours</button>
+	</div>
+	{{>logout}}
+</center>	
+</template>
+<template name="backButton">
+	<div class="backButton">
+		<input type="button" class="Back" value="<" style="font-size:40px; color:#2ecc71; background-color: transparent; width: 50px;"/>
+	</div>
+</template>
+
+<template name="logout">
+	<div class="logout">
+		<a id="logout">Log Out</a>
+	</div>
+</template>
+
